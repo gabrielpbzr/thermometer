@@ -33,17 +33,14 @@ void ow_write(uint8_t value) {
 
 uint8_t ow_read() {
     uint8_t data = 0;
+    DQ_PIN = 0;
     for (uint8_t i = 0; i < 8; i++) {
-        DQ_PIN = 0;
         OW_LOW
         __delay_us(5);
         OW_HIGH
-        __delay_us(15);
-        if (DQ_PIN == 1) {
-            data |= 0x01;
-        }
-        data <<= 1;
-        __delay_us(1);
+        __delay_us(10);
+        data = data | (DQ_PIN << i);
+        __delay_us(45);
     }
 
     return data;

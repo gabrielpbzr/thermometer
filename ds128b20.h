@@ -20,7 +20,7 @@
 #define DS18B20_RESOLUTION_11_BIT 0x5F // 375ms
 #define DS18B20_RESOLUTION_12_BIT 0x7F // 750ms
     
-#define DS18B20_CONVERT_DELAY_MS_9_BIT 95 //ms
+#define DS18B20_CONVERT_DELAY_MS_9_BIT 100 //ms
 #define DS18B20_CONVERT_DELAY_MS_10_BIT 186 //ms
 #define DS18B20_CONVERT_DELAY_MS_11_BIT 375 //ms
 #define DS18B20_CONVERT_DELAY_MS_12_BIT 750 //ms
@@ -36,7 +36,7 @@ extern "C" {
      * Get sensor readings
      * @return temperature
      */
-    short ds18b20_read_temperature(void);
+    int16_t ds18b20_read_temperature(void);
     
 #ifdef	__cplusplus
 }

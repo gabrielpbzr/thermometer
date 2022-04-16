@@ -21,7 +21,7 @@ void ds18b20_setup(void) {
     ow_write(DS18B20_RESOLUTION_9_BIT);
 }
 
-short ds18b20_read_temperature(void) {
+int16_t ds18b20_read_temperature(void) {
     ow_reset();
     ow_write(DS18B20_SKIP_ROM);
     ow_write(DS18B20_CONVERT);
@@ -34,8 +34,8 @@ short ds18b20_read_temperature(void) {
     // A partir de agora o sensor irá enviar 4 bytes. Vamos precisar
     // só dos dois primeiros (Tl e Th)
 
-    unsigned char lsb = ow_read();
-    unsigned char msb = ow_read();
+    uint8_t lsb = ow_read();
+    uint8_t msb = ow_read();
     ow_reset(); // Encerra a comunicação com o sensor
     
     /*
@@ -53,7 +53,7 @@ short ds18b20_read_temperature(void) {
      */
     
     int16_t temp = (msb<< 8) | lsb;
-    temp = (msb & 0x0F); // Mantém somente o bit 4 para indicar o sinal (se 1 a temperatura é negativa)
+    //temp = temp & 0x0FF0; // Mantém somente o bit 4 para indicar o sinal (se 1 a temperatura é negativa)
     temp = (temp >> 4); // Ignora os 4 últimos bits (indicam o valor decimal)
     
     return temp;
