@@ -1,13 +1,15 @@
 Thermometer
 ======================
 
-Termômetro simples para monitoramento do ambiente, baseado no PIC 12F508 e no 
+Termômetro simples para monitoramento do ambiente, baseado no PIC 12F508 e no
 sensor DS18B20.
 
 ## Funcionamento
 
-O termômetro faz uma leitura da temperatura a cada segundo. Caso a temperatura 
-exceda os 25 graus Celsius, o alarme irá soar até que a temperatura volte a 
+![image Schematic](./schematic.png)
+
+O termômetro faz uma leitura da temperatura a cada 5 segundos. Caso a temperatura
+exceda os 25 graus Celsius, o alarme irá soar até que a temperatura volte a
 baixar.
 
 ## Ferramentas usadas
@@ -15,4 +17,3 @@ baixar.
 - IDE MPLABx v5.35+
 - Compilador XC8 v2.32
 - Programador PICKit3
-

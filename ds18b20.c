@@ -2,9 +2,11 @@
 
 #define BIT_SIGNAL_MASK 0x80
 
-void ds18b20_setup(void) {
+void ds18b20_setup(void)
+{
     bool ok = ow_reset();
-    if (!ok) {
+    if (!ok)
+    {
         BUZZER_PIN = 1;
         __delay_ms(50);
         BUZZER_PIN = 0;
@@ -21,7 +23,8 @@ void ds18b20_setup(void) {
     ow_write(DS18B20_RESOLUTION_9_BIT);
 }
 
-int16_t ds18b20_read_temperature(void) {
+int16_t ds18b20_read_temperature(void)
+{
     ow_reset();
     ow_write(DS18B20_SKIP_ROM);
     ow_write(DS18B20_CONVERT);
@@ -37,7 +40,7 @@ int16_t ds18b20_read_temperature(void) {
     uint8_t lsb = ow_read();
     uint8_t msb = ow_read();
     ow_reset(); // Encerra a comunicação com o sensor
-    
+
     /*
      * Estrutura do pacote de bytes
      *  -------------------------------------
@@ -46,15 +49,14 @@ int16_t ds18b20_read_temperature(void) {
      * | LSB  v   v   v   v   d   d   d   d  |
      * | MSB  s   s   s   s   s   v   v   v  |
      *  -------------------------------------
-     * 
+     *
      * v -> valor inteiro da temperatura
      * s -> sinal (1 temperatura negativa)
      * d -> valor decimal (iniciando em 2^-4 no bit mais a direita)
      */
-    
-    int16_t temp = (msb<< 8) | lsb;
-    //temp = temp & 0x0FF0; // Mantém somente o bit 4 para indicar o sinal (se 1 a temperatura é negativa)
+
+    int16_t temp = (msb << 8) | lsb;
     temp = (temp >> 4); // Ignora os 4 últimos bits (indicam o valor decimal)
-    
+
     return temp;
 }
