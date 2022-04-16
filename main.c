@@ -41,7 +41,7 @@ void main(void) {
             __delay_ms(BUZZER_DELAY);
             BUZZER_PIN = 0;
             __delay_ms(BUZZER_DELAY);
-            int16_t temperature = ds18b20_read_temperature();
+            temperature = ds18b20_read_temperature();
         }
         BUZZER_PIN = 0;
         // wait
